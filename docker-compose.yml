@@ -1,0 +1,13 @@
+services:
+  app:
+    image: rag-agent:latest
+    ports:
+      - "8000:5000"
+    volumes:
+      - ./:/app
+    env_file:
+      - .env
+    # environment:
+    #   - LANGSMITH_API_KEY=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
+    #   - TAVILY_API_KEY=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
+    #   - GROQ_API_KEY=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
