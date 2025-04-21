@@ -1,9 +1,10 @@
 import os
 from dotenv import load_dotenv
 import requests
-import json
 from pydantic import BaseModel
 from langchain.tools import Tool, StructuredTool
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 # Load API keys from .env
 load_dotenv()
@@ -125,4 +126,22 @@ get_weather_tool = StructuredTool.from_function(
     description="Get current weather information using latitude and longitude.",
     func=get_weather_info,
     args_schema=WeatherInput
+)
+
+# =========================
+# Time Tool
+# =========================
+
+def get_current_time() -> str:
+    """
+    Get the current time in Vietnam timezone in the format 'YYYY-MM-DD HH:MM:SS'
+    """
+    vn_timezone = ZoneInfo("Asia/Ho_Chi_Minh")
+    current_time = datetime.now(vn_timezone).strftime("%Y-%m-%d %H:%M:%S")
+    return f"Current time in Vietnam: {current_time}"
+
+get_current_time_tool = StructuredTool.from_function(
+    name="get_current_time",
+    description="Get the current time in Vietnam timezone in the format 'YYYY-MM-DD HH:MM:SS'.",
+    func=get_current_time
 )

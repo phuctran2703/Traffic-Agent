@@ -15,7 +15,7 @@ from sentence_transformers import SentenceTransformer
 from langchain_huggingface import HuggingFaceEmbeddings
 from pydantic import BaseModel
 from app.helper import *
-from app.tools import geocode_address_tool, get_traffic_status_tool, get_weather_tool
+from app.tools import geocode_address_tool, get_traffic_status_tool, get_weather_tool, get_current_time_tool
 
 # ========== Configuration ==========
 LLM_NAME = "qwen-qwq-32b"
@@ -155,7 +155,7 @@ search_tool = DuckDuckGoSearchRun()
 # rag_model = graph_builder.compile()
 
 # tools = [retrieve_documents_tool, search_tool, geocode_address_tool, get_traffic_status_tool, get_weather_tool]
-tools = [search_tool, geocode_address_tool, get_traffic_status_tool, get_weather_tool]
+tools = [search_tool, geocode_address_tool, get_traffic_status_tool, get_weather_tool, get_current_time_tool]
 rag_model = create_react_agent(llm, tools)
 
 # ========== Querry ==========
