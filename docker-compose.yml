@@ -1,6 +1,6 @@
 services:
   app:
-    image: rag-agent:latest
+    image: registry.gitlab.com/phuctran2703/traffic-agent:latest
     ports:
       - "8000:5000"
     volumes:

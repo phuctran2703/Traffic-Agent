@@ -1,6 +1,5 @@
-FROM chromadb/chroma:latest
-
-RUN pip install --no-cache-dir --upgrade pip
+FROM rag-agent:latest
+# FROM chromadb/chroma:latest
 
 WORKDIR /app
 COPY . .
