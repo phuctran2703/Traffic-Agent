@@ -3,7 +3,7 @@ from fastapi.responses import HTMLResponse, FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uuid, os
 
-from app.rag_agent import add_pdf_to_vectorstore, query_llm
+from app.agent import add_pdf_to_vectorstore, query_llm
 
 app = FastAPI()
 

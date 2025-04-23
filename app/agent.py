@@ -20,7 +20,7 @@ from app.tools import geocode_address_tool, get_traffic_status_tool, get_weather
 # ========== Configuration ==========
 LLM_NAME = "qwen-qwq-32b"
 VECTOR_STORE_DIR = "./chroma_db"
-COLLECTION_NAME = "rag_collection"
+COLLECTION_NAME = "agent_collection"
 
 # ========== Initialize Components ==========
 
@@ -152,11 +152,11 @@ search_tool = DuckDuckGoSearchRun()
 # graph_builder.add_edge("generate", END)
 
 # # Compile the graph into a runnable model
-# rag_model = graph_builder.compile()
+# agent_model = graph_builder.compile()
 
 # tools = [retrieve_documents_tool, search_tool, geocode_address_tool, get_traffic_status_tool, get_weather_tool]
 tools = [search_tool, geocode_address_tool, get_traffic_status_tool, get_weather_tool, get_current_time_tool]
-rag_model = create_react_agent(llm, tools)
+agent_model = create_react_agent(llm, tools)
 
 # ========== Querry ==========
 def query_llm(prompt: str) -> str:
@@ -172,7 +172,7 @@ def query_llm(prompt: str) -> str:
         "- If none of the sources provide sufficient data, explain that and give the best possible answer based on general knowledge."
     )
 
-    response = rag_model.invoke({
+    response = agent_model.invoke({
         "messages": [
             SystemMessage(content=system_prompt),
             HumanMessage(content=prompt)
